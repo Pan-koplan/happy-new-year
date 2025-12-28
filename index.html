@@ -43,15 +43,15 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-light type="ambient" color="#fff4d5" intensity="1.2"></a-light>
+      <a-light type="ambient" color="#fff4d5" intensity="2.0"></a-light>
 
-      <a-entity light="type: spot; intensity: 2.0; angle: 60; color: #ffffff" position="0 5 0" rotation="-90 0 0"></a-entity>
+      <a-entity light="type: spot; intensity: 2.0; angle: 60; color: ##fff4d5" position="0 5 0" rotation="-90 0 0"></a-entity>
       
-      <a-entity light="type: directional; intensity: 1.5; color: #ffca7b" position="1 2 2"></a-entity>
+      <a-entity light="type: directional; intensity: 2.0; color: #ffca7b" position="1 2 2"></a-entity>
       
       <a-entity light="type: point; intensity: 2.0; color: #ffdca0; distance: 5" position="0 -2 1"></a-entity>
       
-      <a-entity light="type: directional; intensity: 1.2; color: #ffffff" position="0 3 -3"></a-entity>
+      <a-entity light="type: directional; intensity: 2.0; color: ##fff4d5" position="0 3 -3"></a-entity>
 
       <a-entity mindar-image-target="targetIndex: 0" id="target">
         <a-gltf-model 
@@ -64,28 +64,9 @@
         </a-gltf-model>
 
         <a-entity id="fw-container" visible="false">
-            <a-sphere position="0 0.5 0" radius="0.12" color="#ff1493" animation="property: position; to: 1 4 -1; dur: 1500; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.15" color="#ff0000" animation="property: position; to: -1 4.5 0.5; dur: 1600; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.13" color="#ffffff" animation="property: position; to: 0 5 1.5; dur: 1700; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.14" color="#ff69b4" animation="property: position; to: 1.5 3.5 1; dur: 1400; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.12" color="#dc143c" animation="property: position; to: -1.5 3.8 -1; dur: 1550; startEvents: explode"></a-sphere>
-        
-            <a-sphere position="0 0.5 0" radius="0.08" color="#ff69b4" animation="property: position; to: 2 2 -0.5; dur: 1300; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.09" color="#ffffff" animation="property: position; to: -2 2.2 0.8; dur: 1450; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.07" color="#ff0000" animation="property: position; to: 0.8 4.2 -2; dur: 1800; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.08" color="#ff1493" animation="property: position; to: -0.8 4.8 -1.5; dur: 1900; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.07" color="#ffffff" animation="property: position; to: 0 5.5 -0.5; dur: 2000; startEvents: explode"></a-sphere>
-        
-            <a-sphere position="0 0.5 0" radius="0.04" color="#ff69b4" animation="property: position; to: 1.2 1.5 2; dur: 1200; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.03" color="#ffffff" animation="property: position; to: -1.2 1.8 1.8; dur: 1100; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.05" color="#dc143c" animation="property: position; to: 2.5 2.5 0; dur: 1400; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.04" color="#ff1493" animation="property: position; to: -2.5 2.5 -1; dur: 1400; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.03" color="#ffffff" animation="property: position; to: 0.5 6 0; dur: 2200; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.04" color="#ff0000" animation="property: position; to: -0.5 5.8 0.5; dur: 2100; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.05" color="#ff69b4" animation="property: position; to: 1.8 4.5 -2.5; dur: 1900; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.04" color="#ffffff" animation="property: position; to: -1.8 4 -2.2; dur: 1850; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.03" color="#ff0000" animation="property: position; to: 0 2 3; dur: 1300; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.05" color="#ff1493" animation="property: position; to: 0 1.5 -3; dur: 1250; startEvents: explode"></a-sphere>
+            <a-entity id="batch1"></a-entity>
+            <a-entity id="batch2"></a-entity>
+            <a-entity id="batch3"></a-entity>
         </a-entity>
       </a-entity>
 
@@ -98,6 +79,53 @@
       const dog = document.getElementById('dog');
       const target = document.getElementById('target');
       const fw = document.getElementById('fw-container');
+      let fireworksLaunched = false;
+
+      // Функция для создания шарика
+      function createSphere(color, size, targetPos) {
+          const s = document.createElement('a-sphere');
+          s.setAttribute('radius', size);
+          s.setAttribute('color', color);
+          s.setAttribute('position', '0 0.5 0');
+          // Ограничиваем разлет (to), чтобы они не улетали далеко
+          s.setAttribute('animation', `property: position; to: ${targetPos}; dur: 1500; easing: easeOutExpo; startEvents: explode`);
+          s.setAttribute('animation__fade', `property: opacity; from: 1; to: 0; dur: 1000; delay: 1200; startEvents: explode`);
+          return s;
+      }
+      
+      audio.addEventListener("timeupdate", () => {
+        if (audio.currentTime >= 98 && !fireworksLaunched) {
+          fireworksLaunched = true;
+          dog.setAttribute('animation-mixer', 'timeScale: 0');
+          fw.setAttribute('visible', 'true');
+      
+          const colors = ['#ff1493', '#ff0000', '#ffffff', '#ff69b4', '#dc143c'];
+          const batches = [document.getElementById('batch1'), document.getElementById('batch2'), document.getElementById('batch3')];
+      
+          // Генерируем 50 шаров
+          for (let i = 0; i < 50; i++) {
+              const color = colors[Math.floor(Math.random() * colors.length)];
+              const size = Math.random() * (0.15 - 0.05) + 0.05; // Разные размеры
+              
+              // Ограничиваем координаты разлета в пределах 1.5 метров
+              const tx = (Math.random() - 0.5) * 2.5; 
+              const ty = Math.random() * 2.5 + 1.5; 
+              const tz = (Math.random() - 0.5) * 2.5;
+              const targetPos = `${tx} ${ty} ${tz}`;
+      
+              const sphere = createSphere(color, size, targetPos);
+              const batchIndex = Math.floor(i / 17); // Делим 50 на 3 порции
+              batches[batchIndex].appendChild(sphere);
+          }
+      
+          // Запускаем порции с задержкой
+          batches.forEach((batch, index) => {
+              setTimeout(() => {
+                  batch.querySelectorAll('a-sphere').forEach(s => s.emit('explode'));
+              }, index * 400); // Интервал между залпами 0.4 сек
+          });
+        }
+      });
 
       startButton.addEventListener('click', () => {
         startScreen.style.display = 'none';
@@ -129,10 +157,10 @@
       
       audio.addEventListener("timeupdate", () => {
         // Проверяем, достигло ли время 98 секунд
-        if (audio.currentTime >= 98 && !fireworksLaunched) {
+        if (audio.currentTime >= 97 && !fireworksLaunched) {
           fireworksLaunched = true; // Фиксируем запуск
           
-          console.log("98 секунд! Запуск салюта и остановка анимации.");
+          console.log("97 секунд! Запуск салюта и остановка анимации.");
           
           // 1. Останавливаем анимацию собаки
           dog.setAttribute('animation-mixer', 'timeScale: 0');
