@@ -24,7 +24,7 @@
 
     <div id="start-screen">
       <div>
-        <h1>Новогодний сюрприз</h1>
+        <h1>🎄 Новогодний сюрприз</h1>
         <button id="startButton">ОТКРЫТЬ ПОДАРОК</button>
       </div>
     </div>
@@ -43,15 +43,11 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-light type="ambient" color="#fff4d5" intensity="2.0"></a-light>
-
-      <a-entity light="type: spot; intensity: 2.0; angle: 60; color: ##fff4d5" position="0 5 0" rotation="-90 0 0"></a-entity>
-      
+      <a-light type="ambient" color="#fff4d5" intensity="1.5"></a-light>
+      <a-entity light="type: spot; intensity: 2.0; angle: 60; color: #fff4d5" position="0 5 0" rotation="-90 0 0"></a-entity>
       <a-entity light="type: directional; intensity: 2.0; color: #ffca7b" position="1 2 2"></a-entity>
-      
-      <a-entity light="type: point; intensity: 2.0; color: #ffdca0; distance: 5" position="0 -2 1"></a-entity>
-      
-      <a-entity light="type: directional; intensity: 2.0; color: ##fff4d5" position="0 3 -3"></a-entity>
+      <a-entity light="type: point; intensity: 2.5; color: #ffdca0; distance: 10" position="0 -3 1"></a-entity>
+      <a-entity light="type: directional; intensity: 1.5; color: #fff4d5" position="0 3 -3"></a-entity>
 
       <a-entity mindar-image-target="targetIndex: 0" id="target">
         <a-gltf-model 
@@ -64,29 +60,59 @@
         </a-gltf-model>
 
         <a-entity id="fw-container" visible="false">
-          <a-sphere position="0 0.5 0" radius="0.12" color="#ff1493" animation="property: position; to: 1 4 -1; dur: 1500; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.15" color="#ff0000" animation="property: position; to: -1 4.5 0.5; dur: 1600; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.13" color="#ffffff" animation="property: position; to: 0 5 1.5; dur: 1700; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.14" color="#ff69b4" animation="property: position; to: 1.5 3.5 1; dur: 1400; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.12" color="#dc143c" animation="property: position; to: -1.5 3.8 -1; dur: 1550; startEvents: explode"></a-sphere>
-      
-          <a-sphere position="0 0.5 0" radius="0.08" color="#ff69b4" animation="property: position; to: 2 2 -0.5; dur: 1300; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.09" color="#ffffff" animation="property: position; to: -2 2.2 0.8; dur: 1450; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.07" color="#ff0000" animation="property: position; to: 0.8 4.2 -2; dur: 1800; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.08" color="#ff1493" animation="property: position; to: -0.8 4.8 -1.5; dur: 1900; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.07" color="#ffffff" animation="property: position; to: 0 5.5 -0.5; dur: 2000; startEvents: explode"></a-sphere>
-      
-          <a-sphere position="0 0.5 0" radius="0.04" color="#ff69b4" animation="property: position; to: 1.2 1.5 2; dur: 1200; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.03" color="#ffffff" animation="property: position; to: -1.2 1.8 1.8; dur: 1100; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.05" color="#dc143c" animation="property: position; to: 2.5 2.5 0; dur: 1400; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.04" color="#ff1493" animation="property: position; to: -2.5 2.5 -1; dur: 1400; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.03" color="#ffffff" animation="property: position; to: 0.5 6 0; dur: 2200; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.04" color="#ff0000" animation="property: position; to: -0.5 5.8 0.5; dur: 2100; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.05" color="#ff69b4" animation="property: position; to: 1.8 4.5 -2.5; dur: 1900; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.04" color="#ffffff" animation="property: position; to: -1.8 4 -2.2; dur: 1850; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.03" color="#ff0000" animation="property: position; to: 0 2 3; dur: 1300; startEvents: explode"></a-sphere>
-          <a-sphere position="0 0.5 0" radius="0.05" color="#ff1493" animation="property: position; to: 0 1.5 -3; dur: 1250; startEvents: explode"></a-sphere>
-      </a-entity>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.12" color="#ff1493" animation="property: position; to: 0.5 2.5 0.5; dur: 1500; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.08" color="#ffffff" animation="property: position; to: -0.5 3 -0.5; dur: 1400; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.15" color="#ff0000" animation="property: position; to: 0.8 1.5 -0.8; dur: 1600; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.05" color="#ff69b4" animation="property: position; to: -1 2 1; dur: 1300; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.10" color="#ffffff" animation="property: position; to: 0 4 0.5; dur: 1800; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.07" color="#ff1493" animation="property: position; to: 1.2 2 -1.2; dur: 1500; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.13" color="#ff0000" animation="property: position; to: -1.2 3.5 0.2; dur: 1700; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.09" color="#ffffff" animation="property: position; to: 0.5 4 -0.5; dur: 1900; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.11" color="#ff69b4" animation="property: position; to: -0.5 2.8 -1.5; dur: 1400; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.14" color="#ff1493" animation="property: position; to: 1.5 1.5 0; dur: 1300; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.06" color="#ffffff" animation="property: position; to: -1.5 2 0.5; dur: 1550; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.12" color="#ff0000" animation="property: position; to: 0 3 -2; dur: 1650; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.08" color="#ff69b4" animation="property: position; to: 1.8 2.2 0.8; dur: 1450; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.10" color="#ffffff" animation="property: position; to: -1.8 1.8 -0.8; dur: 1350; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch0" position="0 0.2 0" radius="0.15" color="#ff1493" animation="property: position; to: 0.5 5 0; dur: 2000; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.11" color="#ff0000" animation="property: position; to: 1.2 3.8 0.5; dur: 1500; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.09" color="#ffffff" animation="property: position; to: -1.2 3.2 -1; dur: 1400; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.13" color="#ff69b4" animation="property: position; to: 0.5 4.5 1.5; dur: 1600; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.07" color="#ff1493" animation="property: position; to: -0.5 4 -1.2; dur: 1500; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.10" color="#ffffff" animation="property: position; to: 1.5 2.5 1.2; dur: 1700; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.14" color="#ff0000" animation="property: position; to: -1.5 2.2 0.8; dur: 1400; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.08" color="#ff69b4" animation="property: position; to: 0 5.5 -0.5; dur: 1800; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.12" color="#ffffff" animation="property: position; to: 0.8 3.5 1.8; dur: 1300; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.11" color="#ff1493" animation="property: position; to: -0.8 3.8 -1.8; dur: 1550; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.09" color="#ff0000" animation="property: position; to: 1.8 2.8 0.5; dur: 1650; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.10" color="#ffffff" animation="property: position; to: -1.8 2.5 1.5; dur: 1450; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.07" color="#ff69b4" animation="property: position; to: 0 4.2 2; dur: 1750; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.13" color="#ff1493" animation="property: position; to: 2.2 1.5 -1.5; dur: 1900; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.08" color="#ffffff" animation="property: position; to: -2.2 1.8 1.2; dur: 1350; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch1" position="0 0.2 0" radius="0.15" color="#ff0000" animation="property: position; to: 0.5 5.2 -1.5; dur: 2100; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.11" color="#ff69b4" animation="property: position; to: 1.5 4.5 1.5; dur: 1500; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.09" color="#ffffff" animation="property: position; to: -1.5 4.2 -1.5; dur: 1400; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.13" color="#ff0000" animation="property: position; to: 0 5.8 0; dur: 1600; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.07" color="#ff1493" animation="property: position; to: 2 3 -2; dur: 1500; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.10" color="#ffffff" animation="property: position; to: -2 3.5 2; dur: 1700; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.14" color="#ff69b4" animation="property: position; to: 0.8 5 1.8; dur: 1400; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.08" color="#ff1493" animation="property: position; to: -0.8 4.8 -1.8; dur: 1800; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.12" color="#ffffff" animation="property: position; to: 1.2 2.5 2.2; dur: 1300; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.11" color="#ff0000" animation="property: position; to: -1.2 2.8 -2.2; dur: 1550; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.09" color="#ff69b4" animation="property: position; to: 2.5 1.5 0.5; dur: 1650; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.10" color="#ffffff" animation="property: position; to: -2.5 2 -0.5; dur: 1450; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.07" color="#ff1493" animation="property: position; to: 0 2.2 2.5; dur: 1750; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.13" color="#ff0000" animation="property: position; to: 0.5 1.8 -2.5; dur: 1900; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.08" color="#ffffff" animation="property: position; to: -0.5 1.5 3; dur: 1350; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.15" color="#ff69b4" animation="property: position; to: 0 6 1; dur: 2200; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.11" color="#ff1493" animation="property: position; to: 3 3 0; dur: 1600; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.12" color="#ffffff" animation="property: position; to: -3 3 0; dur: 1600; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.09" color="#ff0000" animation="property: position; to: 0 1.5 4; dur: 1400; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.14" color="#ff69b4" animation="property: position; to: 0 1.5 -4; dur: 1400; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+            <a-sphere class="batch2" position="0 0.2 0" radius="0.10" color="#ffffff" animation="property: position; to: 1 1.5 3.5; dur: 1500; startEvents: explode" animation__fade="property: opacity; from: 1; to: 0; dur: 800; delay: 1200; startEvents: explode"></a-sphere>
+        </a-entity>
       </a-entity>
 
     </a-scene>
@@ -100,42 +126,52 @@
       const fw = document.getElementById('fw-container');
       let fireworksLaunched = false;
 
-      // Функция для создания шарика
-      function createSphere(color, size, targetPos) {
-          const s = document.createElement('a-sphere');
-          s.setAttribute('radius', size);
-          s.setAttribute('color', color);
-          s.setAttribute('position', '0 0.5 0');
-          // Ограничиваем разлет (to), чтобы они не улетали далеко
-          s.setAttribute('animation', `property: position; to: ${targetPos}; dur: 1500; easing: easeOutExpo; startEvents: explode`);
-          s.setAttribute('animation__fade', `property: opacity; from: 1; to: 0; dur: 1000; delay: 1200; startEvents: explode`);
-          return s;
-      }
-      
-      audio.addEventListener("timeupdate", () => {
-        // Проверяем, достигло ли время 98 секунд
-        if (audio.currentTime >= 97 && !fireworksLaunched) {
-          fireworksLaunched = true; // Фиксируем запуск
-          
-          console.log("97 секунд! Запуск салюта и остановка анимации.");
-          
-          // 1. Останавливаем анимацию собаки
-          dog.setAttribute('animation-mixer', 'timeScale: 0');
-          
-          // 2. Запускаем салют
-          fw.setAttribute('visible', 'true');
-          fw.querySelectorAll('a-sphere').forEach(s => s.emit('explode'));
-        }
+      // КЛИК ПО КНОПКЕ
+      startButton.addEventListener('click', () => {
+        startScreen.style.display = 'none';
+        
+        // ВАЖНО: Запуск MindAR системы
+        const sceneEl = document.querySelector('a-scene');
+        sceneEl.systems["mindar-image-system"].start(); 
+
+        // Разблокировка аудио
+        audio.play().then(() => {
+          audio.pause();
+          audio.currentTime = 0;
+        }).catch(e => console.log("Audio ready"));
       });
-      
-      // Сброс флага, если маркер потерян или видео началось заново, 
-      // чтобы при следующем просмотре салют снова сработал на 98 сек.
+
+      target.addEventListener("targetFound", () => {
+        audio.play();
+        dog.setAttribute('animation-mixer', 'timeScale: 1');
+      });
+
       target.addEventListener("targetLost", () => {
         audio.pause();
         dog.setAttribute('animation-mixer', 'timeScale: 0');
-        // Если хочешь, чтобы при каждом наведении всё начиналось заново:
-        // fireworksLaunched = false; 
-        // fw.setAttribute('visible', 'false');
+      });
+
+      audio.addEventListener("timeupdate", () => {
+        // На 97-й секунде запускаем салют
+        if (audio.currentTime >= 97 && !fireworksLaunched) {
+          fireworksLaunched = true;
+          
+          dog.setAttribute('animation-mixer', 'timeScale: 0');
+          fw.setAttribute('visible', 'true');
+
+          // Запуск порциями для красоты
+          setTimeout(() => {
+            fw.querySelectorAll('.batch0').forEach(s => s.emit('explode'));
+          }, 0);
+          
+          setTimeout(() => {
+            fw.querySelectorAll('.batch1').forEach(s => s.emit('explode'));
+          }, 400);
+          
+          setTimeout(() => {
+            fw.querySelectorAll('.batch2').forEach(s => s.emit('explode'));
+          }, 800);
+        }
       });
     </script>
   </body>
