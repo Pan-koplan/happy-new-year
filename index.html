@@ -24,7 +24,7 @@
 
     <div id="start-screen">
       <div>
-        <h1>🎄 Новогодний сюрприз</h1>
+        <h1>Новогодний сюрприз</h1>
         <button id="startButton">ОТКРЫТЬ ПОДАРОК</button>
       </div>
     </div>
@@ -57,12 +57,11 @@
         </a-gltf-model>
 
         <a-entity id="fw-container" visible="false">
-            <a-sphere position="0 0.5 0" radius="0.05" color="yellow" 
-                      animation="property: position; to: 1 2 -1; dur: 1000; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.05" color="orange" 
-                      animation="property: position; to: -1 2 0; dur: 1000; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.05" color="white" 
-                      animation="property: position; to: 0 2 1; dur: 1000; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.05" color="yellow" animation="property: position; to: 1 2.5 -1; dur: 1200; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.05" color="#f1c40f" animation="property: position; to: -1 2 0.5; dur: 1200; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.05" color="white" animation="property: position; to: 0.2 3 1; dur: 1200; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.05" color="#ff5733" animation="property: position; to: -0.8 2.8 -0.5; dur: 1200; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.05" color="gold" animation="property: position; to: 0.8 1.8 0.8; dur: 1200; startEvents: explode"></a-sphere>
         </a-entity>
       </a-entity>
 
@@ -101,11 +100,33 @@
         dog.setAttribute('animation-mixer', 'timeScale: 0');
       });
 
-      audio.addEventListener("ended", () => {
+      // Переменная-флаг, чтобы салют не срабатывал многократно каждую миллисекунду
+      let fireworksLaunched = false;
+      
+      audio.addEventListener("timeupdate", () => {
+        // Проверяем, достигло ли время 98 секунд
+        if (audio.currentTime >= 98 && !fireworksLaunched) {
+          fireworksLaunched = true; // Фиксируем запуск
+          
+          console.log("98 секунд! Запуск салюта и остановка анимации.");
+          
+          // 1. Останавливаем анимацию собаки
+          dog.setAttribute('animation-mixer', 'timeScale: 0');
+          
+          // 2. Запускаем салют
+          fw.setAttribute('visible', 'true');
+          fw.querySelectorAll('a-sphere').forEach(s => s.emit('explode'));
+        }
+      });
+      
+      // Сброс флага, если маркер потерян или видео началось заново, 
+      // чтобы при следующем просмотре салют снова сработал на 98 сек.
+      target.addEventListener("targetLost", () => {
+        audio.pause();
         dog.setAttribute('animation-mixer', 'timeScale: 0');
-        // Запуск салюта
-        fw.setAttribute('visible', 'true');
-        fw.querySelectorAll('a-sphere').forEach(s => s.emit('explode'));
+        // Если хочешь, чтобы при каждом наведении всё начиналось заново:
+        // fireworksLaunched = false; 
+        // fw.setAttribute('visible', 'false');
       });
     </script>
   </body>
