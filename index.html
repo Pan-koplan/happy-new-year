@@ -5,15 +5,14 @@
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-particle-system-component@master/dist/aframe-particle-system-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
     
     <style>
       #start-screen {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background: radial-gradient(circle, #2c3e50 0%, #000000 100%);
         z-index: 9999; display: flex; justify-content: center; align-items: center;
-        color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        text-align: center; cursor: pointer;
+        color: white; font-family: sans-serif; text-align: center; cursor: pointer;
       }
       .button {
         background: #f1c40f; color: #000; padding: 15px 30px;
@@ -24,16 +23,17 @@
   </head>
   <body>
 
-    <div id="start-screen" onclick="startExperience()">
+    <div id="start-screen">
       <div>
         <h1>Новогодний сюрприз</h1>
-        <p>Включи звук, нажми кнопку<br>и наводи на открытку!</p>
-        <div class="button">ОТКРЫТЬ ПОДАРОК</div>
+        <p>Включи звук и нажми кнопку,<br>чтобы активировать камеру</p>
+        <div class="button" id="startButton">ОТКРЫТЬ ПОДАРОК</div>
       </div>
     </div>
 
     <a-scene 
-      mindar-image="imageTargetSrc: ./targets.mind;" 
+      id="mainScene"
+      mindar-image="imageTargetSrc: ./targets.mind; autoStart: false;" 
       color-space="sRGB" 
       renderer="colorManagement: true, physicallyCorrectLights: true" 
       vr-mode-ui="enabled: false" 
@@ -47,15 +47,11 @@
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-light type="ambient" color="#fff4d5" intensity="0.8"></a-light>
-      <a-entity light="type: spot; intensity: 1.8; angle: 45; color: #ffca7b; distance: 10" 
-                position="0 5 0" rotation="-90 0 0"></a-entity>
-      <a-entity light="type: point; intensity: 1.5; color: #ffdca0; distance: 5" 
-                position="0 -2 1"></a-entity>
-      <a-entity light="type: directional; intensity: 1.0; color: #ffffff" 
-                position="-2 3 2"></a-entity>
+      <a-entity light="type: spot; intensity: 1.8; color: #ffca7b;" position="0 5 0" rotation="-90 0 0"></a-entity>
+      <a-entity light="type: point; intensity: 1.5; color: #ffdca0;" position="0 -2 1"></a-entity>
+      <a-entity light="type: directional; intensity: 1.0;" position="-2 3 2"></a-entity>
 
       <a-entity mindar-image-target="targetIndex: 0" id="target">
-        
         <a-gltf-model 
           id="dog"
           src="#dogModel" 
@@ -66,33 +62,39 @@
         </a-gltf-model>
 
         <a-entity id="fireworks" 
-          position="0 0 0.2" 
-          particle-system="preset: stars; color: #f1c40f, #ff5733, #ffffff; particleCount: 1000; size: 1; velocityValue: 0 5 0; accelerationValue: 0 -2 0; enabled: false">
+          position="0 1 0" 
+          particle-system="preset: stars; color: #f1c40f, #ff5733; particleCount: 1000; size: 1; enabled: false">
         </a-entity>
+      </a-entity>
 
-      </a-entity> </a-scene>
+    </a-scene>
 
     <script>
+      const startButton = document.getElementById('startButton');
       const startScreen = document.getElementById('start-screen');
+      const sceneEl = document.querySelector('a-scene');
       const audio = document.getElementById('greetingAudio');
       const dog = document.getElementById('dog');
       const target = document.getElementById('target');
       const fireworks = document.getElementById('fireworks');
-      let isUnlocked = false;
 
-      function startExperience() {
-        if (isUnlocked) return;
-        isUnlocked = true;
+      // Клик по кнопке
+      startButton.addEventListener('click', () => {
+        // 1. Убираем экран
+        startScreen.style.display = 'none';
+
+        // 2. Запускаем AR (система MindAR)
+        const arSystem = sceneEl.systems["mindar-image-system"];
+        arSystem.start(); 
+
+        // 3. Разблокируем аудио (костыль для мобилок)
         audio.play().then(() => {
           audio.pause();
           audio.currentTime = 0;
-          startScreen.style.display = 'none';
-        }).catch(e => {
-          console.error(e);
-          startScreen.style.display = 'none';
-        });
-      }
+        }).catch(e => console.log("Audio waiting..."));
+      });
 
+      // Логика событий
       target.addEventListener("targetFound", () => {
         audio.play();
         dog.setAttribute('animation-mixer', 'timeScale: 1');
@@ -105,9 +107,7 @@
 
       audio.addEventListener("ended", () => {
         dog.setAttribute('animation-mixer', 'timeScale: 0');
-        // Запуск фейерверка через параметр enabled
         fireworks.setAttribute('particle-system', 'enabled: true');
-        console.log("Салют!");
       });
     </script>
   </body>
