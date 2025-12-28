@@ -27,30 +27,33 @@
     </div>
 
     <a-scene 
-      mindar-image="imageTargetSrc: ./targets.mind;" 
-      color-space="sRGB" 
-      renderer="colorManagement: true, physicallyCorrectLights" 
-      vr-mode-ui="enabled: false" 
-      device-orientation-permission-ui="enabled: false">
+	  mindar-image="imageTargetSrc: ./targets.mind;" 
+	  color-space="sRGB" 
+	  renderer="colorManagement: true, physicallyCorrectLights: true" 
+	  vr-mode-ui="enabled: false" 
+	  device-orientation-permission-ui="enabled: false">
 
-      <a-assets>
-        <a-asset-item id="dogModel" src="./dog.glb"></a-asset-item>
-        <audio id="greetingAudio" src="./voice.mp3" preload="auto"></audio>
-      </a-assets>
+	  <a-assets>
+	    <a-asset-item id="dogModel" src="./dog.glb"></a-asset-item>
+	    <audio id="greetingAudio" src="./voice.mp3" preload="auto"></audio>
+	  </a-assets>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+	  <a-light type="ambient" intensity="1.5"></a-light>
+	  <a-light type="directional" position="0 10 5" intensity="1.0"></a-light>
 
-      <a-entity mindar-image-target="targetIndex: 0" id="target">
-        
-        <a-gltf-model 
-          src="#dogModel" 
-          rotation="90 0 0" 
-          position="0 0 0" 
-          scale="0.5 0.5 0.5" 
-          animation-mixer="clip: *; loop: repeat">
-        </a-gltf-model>
-        
-      </a-entity>
+	  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+	  <a-entity mindar-image-target="targetIndex: 0" id="target">
+	    
+	    <a-gltf-model 
+	      src="#dogModel" 
+	      rotation="90 0 0" 
+	      position="0 0 0.1" 
+	      scale="2 2 2" 
+	      animation-mixer="clip: *; loop: repeat">
+	    </a-gltf-model>
+	    
+	  </a-entity>
     </a-scene>
 
     <script>
@@ -62,11 +65,16 @@
 
       // Функция запуска при клике на экран
       function startExperience() {
-        if (started) return;
-        started = true;
-        startScreen.style.display = 'none';
-        // Аудио готово к запуску, но запустим его только когда камера увидит цель
-      }
+	  if (started) return;
+	  started = true;
+	  startScreen.style.display = 'none';
+	  
+	  // "Будим" аудио движок
+	  audio.play().then(() => {
+	    audio.pause();
+	    audio.currentTime = 0;
+	  }).catch(e => console.error("Ошибка звука:", e));
+       }
 
       // Слушаем, когда камера увидит картинку
       target.addEventListener("targetFound", event => {
