@@ -4,32 +4,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
     
     <style>
-      /* Кнопка старта (нужна, чтобы браузер разрешил звук) */
       #start-screen {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.8); z-index: 999; display: flex;
-        justify-content: center; align-items: center; color: white;
-        font-family: sans-serif; font-size: 20px; text-align: center;
+        background: radial-gradient(circle, #2c3e50 0%, #000000 100%);
+        z-index: 9999; display: flex; justify-content: center; align-items: center;
+        color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center; cursor: pointer;
+      }
+      .button {
+        background: #f1c40f; color: #000; padding: 15px 30px;
+        border-radius: 50px; font-weight: bold; margin-top: 20px;
+        box-shadow: 0 0 20px rgba(241, 196, 15, 0.5);
       }
     </style>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-particle-system-component@master/dist/aframe-particle-system-component.min.js"></script>
   </head>
   <body>
-    <div id="start-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: flex; justify-content: center; align-items: center; color: white; font-family: sans-serif; text-align: center; cursor: pointer;">
+
+    <div id="start-screen" onclick="startExperience()">
       <div>
-        <h1 style="margin-bottom: 10px;">Сюрприз готов!</h1>
-        <p style="margin-bottom: 20px;">Нажми на экран и наведи камеру на открытку</p>
-        <div style="background: white; color: black; padding: 10px 20px; border-radius: 50px; display: inline-block; font-weight: bold;">СМОТРЕТЬ</div>
+        <h1>Новогодний сюрприз</h1>
+        <p>Включи звук, нажми кнопку<br>и наводи на открытку!</p>
+        <div class="button">ОТКРЫТЬ ПОДАРОК</div>
       </div>
     </div>
 
     <a-scene 
       mindar-image="imageTargetSrc: ./targets.mind;" 
       color-space="sRGB" 
-      renderer="colorManagement: true, physicallyCorrectLights: true, antialias: true" 
+      renderer="colorManagement: true, physicallyCorrectLights: true" 
       vr-mode-ui="enabled: false" 
       device-orientation-permission-ui="enabled: false">
 
@@ -40,70 +46,81 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-entity light="type: directional; intensity: 1.5; castShadow: false;" 
-          position="2 4 2" 
-          light-helper></a-entity>
+      <a-light type="ambient" color="#fff4d5" intensity="0.8"></a-light>
+      
+      <a-entity light="type: spot; intensity: 1.8; angle: 45; color: #ffca7b; distance: 10" 
+                position="0 5 0" rotation="-90 0 0"></a-entity>
 
-	<a-entity light="type: directional; intensity: 1.0;" 
-		  position="-2 2 2" 
-		  light-helper></a-entity>
+      <a-entity light="type: point; intensity: 1.5; color: #ffdca0; distance: 5" 
+                position="0 -2 1"></a-entity>
 
-	<a-entity light="type: directional; intensity: 1.2;" 
-		  position="0 3 -3" 
-		  light-helper></a-entity>
-
-	<a-entity light="type: point; intensity: 0.5; distance: 5;" 
-		  position="0 -2 1" 
-		  light-helper></a-entity>
-
-	<a-light type="ambient" intensity="1"></a-light>
+      <a-entity light="type: directional; intensity: 1.0; color: #ffffff" 
+                position="-2 3 2"></a-entity>
 
       <a-entity mindar-image-target="targetIndex: 0" id="target">
         <a-gltf-model 
+          id="dog"
           src="#dogModel" 
           rotation="90 0 0" 
           position="0 0 0.1" 
-          scale="5 5 5" 
-          animation-mixer="clip: *; loop: repeat">
+          scale="4 4 4" 
+          animation-mixer="clip: *; timeScale: 0">
         </a-gltf-model>
+        <a-entity id="fireworks" 
+		  position="0 1 0" 
+		  particle-system="preset: stars; color: #f1c40f, #ff5733, #ffffff; particleCount: 500; size: 0.5; velocityValue: 0 2 0; accelerationValue: 0 -1 0; duration: 1" 
+		  visible="false">
+	</a-entity>
       </a-entity>
+
     </a-scene>
 
     <script>
       const startScreen = document.getElementById('start-screen');
       const audio = document.getElementById('greetingAudio');
+      const dog = document.getElementById('dog');
       const target = document.getElementById('target');
-      let isStarted = false;
+      let isUnlocked = false;
 
-      // Функция разблокировки аудио
-      function unlockAudio() {
-        if (isStarted) return;
-        isStarted = true;
+      function startExperience() {
+        if (isUnlocked) return;
+        isUnlocked = true;
         
-        // Магия для мобильных браузеров: запускаем и сразу на паузу
+        // Разблокировка аудио для iOS/Android
         audio.play().then(() => {
           audio.pause();
           audio.currentTime = 0;
           startScreen.style.display = 'none';
-          console.log("Аудио разблокировано");
-        }).catch(err => {
-          console.error("Ошибка разблокировки:", err);
-          startScreen.style.display = 'none'; // Все равно убираем экран
+        }).catch(e => {
+          console.error(e);
+          startScreen.style.display = 'none';
         });
       }
 
-      startScreen.addEventListener('click', unlockAudio);
-      startScreen.addEventListener('touchstart', unlockAudio);
-
-      // Логика появления звука при наведении
+      // Событие: Маркер найден
       target.addEventListener("targetFound", () => {
-        console.log("Вижу маркер!");
-        audio.play().catch(e => console.log("Ждем клика пользователя..."));
+        audio.play();
+        dog.setAttribute('animation-mixer', 'timeScale: 1');
       });
 
+      // Событие: Маркер потерян (пауза)
       target.addEventListener("targetLost", () => {
         audio.pause();
+        dog.setAttribute('animation-mixer', 'timeScale: 0');
       });
+
+      // Событие: Аудио закончилось
+      audio.addEventListener("ended", () => {
+	  // Останавливаем анимацию собаки
+	  dog.setAttribute('animation-mixer', 'timeScale: 0');
+	  
+	  // ВКЛЮЧАЕМ ФЕЙЕРВЕРК
+	  const fireworks = document.getElementById('fireworks');
+	  fireworks.setAttribute('visible', 'true');
+	  
+	  // Дополнительно: можно заставить его "взорваться" (перезапустить систему частиц)
+	  console.log("Поздравление окончено, начался салют!");
+	});
     </script>
   </body>
 </html>
