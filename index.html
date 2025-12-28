@@ -43,8 +43,15 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-light type="ambient" color="#fff" intensity="1.0"></a-light>
-      <a-light type="directional" position="1 2 1" intensity="1.0"></a-light>
+      <a-light type="ambient" color="#fff4d5" intensity="1.2"></a-light>
+
+      <a-entity light="type: spot; intensity: 2.0; angle: 60; color: #ffffff" position="0 5 0" rotation="-90 0 0"></a-entity>
+      
+      <a-entity light="type: directional; intensity: 1.5; color: #ffca7b" position="1 2 2"></a-entity>
+      
+      <a-entity light="type: point; intensity: 2.0; color: #ffdca0; distance: 5" position="0 -2 1"></a-entity>
+      
+      <a-entity light="type: directional; intensity: 1.2; color: #ffffff" position="0 3 -3"></a-entity>
 
       <a-entity mindar-image-target="targetIndex: 0" id="target">
         <a-gltf-model 
@@ -57,11 +64,28 @@
         </a-gltf-model>
 
         <a-entity id="fw-container" visible="false">
-            <a-sphere position="0 0.5 0" radius="0.05" color="yellow" animation="property: position; to: 1 2.5 -1; dur: 1200; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.05" color="#f1c40f" animation="property: position; to: -1 2 0.5; dur: 1200; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.05" color="white" animation="property: position; to: 0.2 3 1; dur: 1200; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.05" color="#ff5733" animation="property: position; to: -0.8 2.8 -0.5; dur: 1200; startEvents: explode"></a-sphere>
-            <a-sphere position="0 0.5 0" radius="0.05" color="gold" animation="property: position; to: 0.8 1.8 0.8; dur: 1200; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.12" color="#ff1493" animation="property: position; to: 1 4 -1; dur: 1500; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.15" color="#ff0000" animation="property: position; to: -1 4.5 0.5; dur: 1600; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.13" color="#ffffff" animation="property: position; to: 0 5 1.5; dur: 1700; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.14" color="#ff69b4" animation="property: position; to: 1.5 3.5 1; dur: 1400; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.12" color="#dc143c" animation="property: position; to: -1.5 3.8 -1; dur: 1550; startEvents: explode"></a-sphere>
+        
+            <a-sphere position="0 0.5 0" radius="0.08" color="#ff69b4" animation="property: position; to: 2 2 -0.5; dur: 1300; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.09" color="#ffffff" animation="property: position; to: -2 2.2 0.8; dur: 1450; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.07" color="#ff0000" animation="property: position; to: 0.8 4.2 -2; dur: 1800; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.08" color="#ff1493" animation="property: position; to: -0.8 4.8 -1.5; dur: 1900; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.07" color="#ffffff" animation="property: position; to: 0 5.5 -0.5; dur: 2000; startEvents: explode"></a-sphere>
+        
+            <a-sphere position="0 0.5 0" radius="0.04" color="#ff69b4" animation="property: position; to: 1.2 1.5 2; dur: 1200; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.03" color="#ffffff" animation="property: position; to: -1.2 1.8 1.8; dur: 1100; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.05" color="#dc143c" animation="property: position; to: 2.5 2.5 0; dur: 1400; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.04" color="#ff1493" animation="property: position; to: -2.5 2.5 -1; dur: 1400; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.03" color="#ffffff" animation="property: position; to: 0.5 6 0; dur: 2200; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.04" color="#ff0000" animation="property: position; to: -0.5 5.8 0.5; dur: 2100; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.05" color="#ff69b4" animation="property: position; to: 1.8 4.5 -2.5; dur: 1900; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.04" color="#ffffff" animation="property: position; to: -1.8 4 -2.2; dur: 1850; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.03" color="#ff0000" animation="property: position; to: 0 2 3; dur: 1300; startEvents: explode"></a-sphere>
+            <a-sphere position="0 0.5 0" radius="0.05" color="#ff1493" animation="property: position; to: 0 1.5 -3; dur: 1250; startEvents: explode"></a-sphere>
         </a-entity>
       </a-entity>
 
